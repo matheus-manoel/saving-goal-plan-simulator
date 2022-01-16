@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import numeral from 'numeral';
 import { ReactComponent as HouseIcon } from '../../assets/icons/buy-a-house.svg';
 import CurrencyInput from '../CurrencyInput';
 import MonthAndYearInput from '../MonthAndYearInput';
@@ -78,6 +79,7 @@ export default function SavingGoalPaper(): JSX.Element {
   });
   const [monthlyAmount, setMonthlyAmount] = useState<number>(25000 / 12);
   const [monthsUntilReachDate, setMonthsUntilReachDate] = useState<number>(12);
+  const currencyFormat = '$0,0.00';
 
   useEffect(() => {
     const newMonthsUntilReachDate = dayjs()
@@ -110,10 +112,16 @@ export default function SavingGoalPaper(): JSX.Element {
       <ResultsWrapper>
         <ResultsMainRow>
           <ResultsLabel>Monthly amount</ResultsLabel>
-          <ResultsValue>{monthlyAmount}</ResultsValue>
+          <ResultsValue>
+            {numeral(monthlyAmount).format(currencyFormat)}
+          </ResultsValue>
         </ResultsMainRow>
         <ResultsMonthlyDepositsInfo>
-          {`Youre planning ${monthsUntilReachDate} monthly deposits to reach your ${totalAmount} goal by ${reachDate.writtenMonth} ${reachDate.year}.`}
+          {`Youre planning ${monthsUntilReachDate} monthly deposits to reach your ${numeral(
+            totalAmount
+          ).format(currencyFormat)} goal by ${reachDate.writtenMonth} ${
+            reachDate.year
+          }.`}
         </ResultsMonthlyDepositsInfo>
         <ResultsSecondaryRow></ResultsSecondaryRow>
       </ResultsWrapper>

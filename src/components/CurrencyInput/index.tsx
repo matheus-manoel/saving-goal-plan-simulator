@@ -46,6 +46,7 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
         onChange={onChange}
         type={'numerical'}
         defaultValue={25000}
+        name={'amount'}
       />
     </CurrencyInputWrapper>
   );
