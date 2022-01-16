@@ -61,6 +61,9 @@ const ResultsValue = styled.span``;
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ResultsMonthlyDepositsInfo = styled.span``;
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const ConfirmButton = styled.button``;
+
 export default function SavingGoalPaper(): JSX.Element {
   const initialDate = dayjs().add(1, 'year');
   const [totalAmount, setTotalAmount] = useState<number>(25000);
@@ -114,6 +117,8 @@ export default function SavingGoalPaper(): JSX.Element {
         </ResultsMonthlyDepositsInfo>
         <ResultsSecondaryRow></ResultsSecondaryRow>
       </ResultsWrapper>
+
+      <ConfirmButton>Confirm</ConfirmButton>
     </Paper>
   );
 }
