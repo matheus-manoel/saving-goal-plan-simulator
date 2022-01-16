@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import SavingGoalPage from './pages/SavingGoal';
+import './styles.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SavingGoalPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
