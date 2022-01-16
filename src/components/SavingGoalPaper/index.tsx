@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as HouseIcon } from '../../assets/icons/buy-a-house.svg';
 import CurrencyInput from '../CurrencyInput';
@@ -60,6 +61,12 @@ const ResultsValue = styled.span``;
 const ResultsMonthlyDepositsInfo = styled.span``;
 
 export default function SavingGoalPaper(): JSX.Element {
+  const [totalAmount, setTotalAmount] = useState<number>(25000);
+
+  useEffect(() => {
+    console.log(totalAmount);
+  }, [totalAmount]);
+
   return (
     <Paper>
       <Header>
@@ -71,8 +78,8 @@ export default function SavingGoalPaper(): JSX.Element {
       </Header>
 
       <InputWrapper>
-        <CurrencyInput title={'Total amount'} />
-        <MonthAndYearInput title={'Reach goal by'} />
+        <CurrencyInput label={'Total amount'} onChangeValue={setTotalAmount} />
+        <MonthAndYearInput label={'Reach goal by'} />
       </InputWrapper>
 
       <ResultsWrapper>

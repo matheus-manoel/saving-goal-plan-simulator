@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface MonthAndYearInputProps {
-  title?: string;
+  label?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -11,15 +11,15 @@ const MonthAndYearInputWrapper = styled.div`
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const MonthAndYearInputTitle = styled.span``;
+const MonthAndYearInputTitle = styled.label``;
 
 export default function MonthAndYearInput(
   props: MonthAndYearInputProps
 ): JSX.Element {
-  const { title } = props;
+  const { label } = props;
   return (
     <MonthAndYearInputWrapper>
-      {title && <MonthAndYearInputTitle>{title}</MonthAndYearInputTitle>}
+      {label && <MonthAndYearInputTitle>{label}</MonthAndYearInputTitle>}
       <input></input>
     </MonthAndYearInputWrapper>
   );
