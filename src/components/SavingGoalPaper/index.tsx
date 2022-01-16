@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 import { ReactComponent as HouseIcon } from '../../assets/icons/buy-a-house.svg';
 import CurrencyInput from '../CurrencyInput';
 import MonthAndYearInput from '../MonthAndYearInput';
@@ -61,11 +62,29 @@ const ResultsValue = styled.span``;
 const ResultsMonthlyDepositsInfo = styled.span``;
 
 export default function SavingGoalPaper(): JSX.Element {
+  const initialDate = dayjs().add(1, 'year');
   const [totalAmount, setTotalAmount] = useState<number>(25000);
+  const [reachDate, setReachDate] = useState<{
+    month: number;
+    year: number;
+    writtenMonth: string;
+  }>({
+    month: initialDate.month(),
+    year: initialDate.year(),
+    writtenMonth: '',
+  });
+  const [monthlyAmount, setMonthlyAmount] = useState<number>(25000 / 12);
+  const [monthsUntilReachDate, setMonthsUntilReachDate] = useState<number>(12);
 
   useEffect(() => {
-    console.log(totalAmount);
-  }, [totalAmount]);
+    const newMonthsUntilReachDate = dayjs()
+      .day(2)
+      .year(reachDate.year)
+      .month(reachDate.month)
+      .diff(dayjs().day(1), 'month');
+    setMonthsUntilReachDate(newMonthsUntilReachDate);
+    setMonthlyAmount(totalAmount / newMonthsUntilReachDate);
+  }, [totalAmount, reachDate]);
 
   return (
     <Paper>
@@ -79,16 +98,19 @@ export default function SavingGoalPaper(): JSX.Element {
 
       <InputWrapper>
         <CurrencyInput label={'Total amount'} onChangeValue={setTotalAmount} />
-        <MonthAndYearInput label={'Reach goal by'} />
+        <MonthAndYearInput
+          label={'Reach goal by'}
+          onChangeValue={setReachDate}
+        />
       </InputWrapper>
 
       <ResultsWrapper>
         <ResultsMainRow>
           <ResultsLabel>Monthly amount</ResultsLabel>
-          <ResultsValue>$520.83</ResultsValue>
+          <ResultsValue>{monthlyAmount}</ResultsValue>
         </ResultsMainRow>
         <ResultsMonthlyDepositsInfo>
-          {`Youre planning 48 monthly deposits to reac your $25,000 goal by October 2020.`}
+          {`Youre planning ${monthsUntilReachDate} monthly deposits to reach your ${totalAmount} goal by ${reachDate.writtenMonth} ${reachDate.year}.`}
         </ResultsMonthlyDepositsInfo>
         <ResultsSecondaryRow></ResultsSecondaryRow>
       </ResultsWrapper>
