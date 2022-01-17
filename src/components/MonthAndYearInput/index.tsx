@@ -20,7 +20,7 @@ const OuterWrapper = styled.div`
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const MonthAndYearInputTitle = styled.label``;
+const Label = styled.label``;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const InnerWrapper = styled.div`
@@ -89,19 +89,31 @@ export default function MonthAndYearInput(
       onFocus={() => setAreButtonsOnFocus(true)}
       onBlur={() => setAreButtonsOnFocus(false)}
     >
-      {label && <MonthAndYearInputTitle>{label}</MonthAndYearInputTitle>}
+      {label && (
+        <Label data-testid={'month_and_year_input_label'}>{label}</Label>
+      )}
       <InnerWrapper>
         <button
           onClick={onLeftArrowButtonClick}
           disabled={shouldDisableLeftArrow}
+          data-testid={'month_and_year_input_left_arrow_button'}
         >
           {'<'}
         </button>
         <MonthAndYearWrapper>
-          <MonthText>{dayjs.months()[date.month()]}</MonthText>
-          <YearText>{date.year()}</YearText>
+          <MonthText data-testid={'month_and_year_input_month_text'}>
+            {dayjs.months()[date.month()]}
+          </MonthText>
+          <YearText data-testid={'month_and_year_input_year_text'}>
+            {date.year()}
+          </YearText>
         </MonthAndYearWrapper>
-        <button onClick={onRightArrowButtonClick}>{'>'}</button>
+        <button
+          onClick={onRightArrowButtonClick}
+          data-testid={'month_and_year_input_right_arrow_button'}
+        >
+          {'>'}
+        </button>
       </InnerWrapper>
     </OuterWrapper>
   );

@@ -57,7 +57,7 @@ const ResultsSecondaryRow = styled.div``;
 const ResultsLabel = styled.span``;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const ResultsValue = styled.span``;
+const MonthlyAmountText = styled.span``;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ResultsMonthlyDepositsInfo = styled.span``;
@@ -112,12 +112,16 @@ export default function SavingGoalPaper(): JSX.Element {
       <ResultsWrapper>
         <ResultsMainRow>
           <ResultsLabel>Monthly amount</ResultsLabel>
-          <ResultsValue>
+          <MonthlyAmountText
+            data-testid={'saving_goal_paper_monthly_amount_text'}
+          >
             {numeral(monthlyAmount).format(currencyFormat)}
-          </ResultsValue>
+          </MonthlyAmountText>
         </ResultsMainRow>
-        <ResultsMonthlyDepositsInfo>
-          {`Youre planning ${monthsUntilReachDate} monthly deposits to reach your ${numeral(
+        <ResultsMonthlyDepositsInfo
+          data-testid={'saving_goal_paper_results_monthly_deposits_info_text'}
+        >
+          {`You're planning ${monthsUntilReachDate} monthly deposits to reach your ${numeral(
             totalAmount
           ).format(currencyFormat)} goal by ${reachDate.writtenMonth} ${
             reachDate.year

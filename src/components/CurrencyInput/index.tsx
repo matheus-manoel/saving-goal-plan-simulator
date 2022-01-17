@@ -10,13 +10,13 @@ interface CurrencyInputProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const CurrencyInputWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const CurrencyInputTitle = styled.label``;
+const Label = styled.label``;
 
 export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
   const { label, onChangeValue } = props;
@@ -28,8 +28,8 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
   };
 
   return (
-    <CurrencyInputWrapper>
-      {label && <CurrencyInputTitle>{label}</CurrencyInputTitle>}
+    <Wrapper>
+      {label && <Label data-testid={'currency_input_label'}>{label}</Label>}
       <MaskedInput
         mask={createNumberMask({
           prefix: '$',
@@ -39,7 +39,7 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
           allowDecimal: true,
           decimalSymbol: '.',
           decimalLimit: 2,
-          integerLimit: 7,
+          integerLimit: 10,
           allowNegative: false,
           allowLeadingZeroes: false,
         })}
@@ -47,7 +47,8 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
         type={'numerical'}
         defaultValue={25000}
         name={'amount'}
+        data-testid={'currency_input'}
       />
-    </CurrencyInputWrapper>
+    </Wrapper>
   );
 }
