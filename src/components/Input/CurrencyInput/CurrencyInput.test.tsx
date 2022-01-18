@@ -1,14 +1,25 @@
-import CurrencyInput from '.';
 import { render, cleanup } from '@testing-library/react';
 import ReactDOM from 'react-dom';
 import userEvent from '@testing-library/user-event';
+import { ThemeProvider } from 'styled-components';
+
+import CurrencyInput from '.';
+import main from '../../../styles/themes/main';
 
 afterEach(cleanup);
 
 const setUp = (label?: string) => {
   const component = label
-    ? render(<CurrencyInput label={label} />)
-    : render(<CurrencyInput />);
+    ? render(
+        <ThemeProvider theme={main}>
+          <CurrencyInput label={label} />
+        </ThemeProvider>
+      )
+    : render(
+        <ThemeProvider theme={main}>
+          <CurrencyInput />
+        </ThemeProvider>
+      );
   return {
     component,
     currencyInput: component.getByTestId('currency_input'),

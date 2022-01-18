@@ -1,9 +1,12 @@
-import MonthAndYearInput from '.';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import { render, cleanup } from '@testing-library/react';
 import ReactDOM from 'react-dom';
 import userEvent from '@testing-library/user-event';
+import { ThemeProvider } from 'styled-components';
+
+import MonthAndYearInput from '.';
+import main from '../../../styles/themes/main';
 
 dayjs.extend(localeData);
 
@@ -15,8 +18,16 @@ beforeEach(() => {
 
 const setUp = (label?: string) => {
   const component = label
-    ? render(<MonthAndYearInput label={label} />)
-    : render(<MonthAndYearInput />);
+    ? render(
+        <ThemeProvider theme={main}>
+          <MonthAndYearInput label={label} />
+        </ThemeProvider>
+      )
+    : render(
+        <ThemeProvider theme={main}>
+          <MonthAndYearInput />
+        </ThemeProvider>
+      );
   return {
     component,
     monthText: component.getByTestId('month_and_year_input_month_text'),
