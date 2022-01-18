@@ -4,7 +4,9 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import React from 'react';
 import numeral from 'numeral';
 
-interface CurrencyInputProps {
+import { Label } from '../styles';
+
+export interface CurrencyInputProps {
   label?: string;
   onChangeValue?: (value: number) => void;
 }
@@ -14,9 +16,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const Label = styled.label``;
 
 export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
   const { label, onChangeValue } = props;

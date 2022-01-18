@@ -2,13 +2,15 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import styled from 'styled-components';
-import useKeyPress from '../../customHooks/useKeyPress';
+
+import useKeyPress from '../../../customHooks/useKeyPress';
+import { Label } from '../styles';
 
 dayjs.extend(localeData);
 
-interface MonthAndYearInputProps {
+export interface MonthAndYearInputProps {
   label?: string;
-  onChangeValue?: Dispatch<
+  onChangeDate?: Dispatch<
     SetStateAction<{ month: number; year: number; writtenMonth: string }>
   >;
 }
@@ -18,9 +20,6 @@ const OuterWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const Label = styled.label``;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const InnerWrapper = styled.div`
@@ -42,7 +41,7 @@ const YearText = styled.span``;
 export default function MonthAndYearInput(
   props: MonthAndYearInputProps
 ): JSX.Element {
-  const { label, onChangeValue } = props;
+  const { label, onChangeDate } = props;
   const [date, setDate] = useState(dayjs().add(1, 'year'));
   const [shouldDisableLeftArrow, setShouldDisableLeftArrow] = useState(false);
   const isArrowRightPressed = useKeyPress('ArrowRight');
@@ -65,8 +64,8 @@ export default function MonthAndYearInput(
       setShouldDisableLeftArrow(false);
     }
 
-    if (onChangeValue) {
-      onChangeValue({
+    if (onChangeDate) {
+      onChangeDate({
         month: date.month(),
         year: date.year(),
         writtenMonth: dayjs.months()[date.month()],

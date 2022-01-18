@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import numeral from 'numeral';
+
 import { ReactComponent as HouseIcon } from '../../assets/icons/buy-a-house.svg';
-import CurrencyInput from '../CurrencyInput';
-import MonthAndYearInput from '../MonthAndYearInput';
+import Input from '../Input';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const Paper = styled.div`
@@ -26,17 +26,29 @@ const HeaderTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 16px;
+  margin-top: 5px;
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const HeaderTitle = styled.div``;
+const HeaderTitle = styled.h2`
+  font-weight: ${(props) => props.theme.fonts.weights.normal};
+  font-size: 24px;
+  line-height: 28.8px;
+`;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const HeaderSubtitle = styled.div``;
+const HeaderSubtitle = styled.p`
+  font-family: ${(props) => props.theme.fonts.secondary};
+  font-weight: ${(props) => props.theme.fonts.weights.light};
+  color: ${(props) => props.theme.colors.blueGray400};
+  font-size: 16px;
+  line-height: 24px;
+`;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const InputWrapper = styled.div`
   display: flex;
+  margin-top: 28px;
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -102,10 +114,15 @@ export default function SavingGoalPaper(): JSX.Element {
       </Header>
 
       <InputWrapper>
-        <CurrencyInput label={'Total amount'} onChangeValue={setTotalAmount} />
-        <MonthAndYearInput
+        <Input
+          type={'currency'}
+          label={'Total amount'}
+          onChangeValue={setTotalAmount}
+        />
+        <Input
+          type={'monthAndYear'}
           label={'Reach goal by'}
-          onChangeValue={setReachDate}
+          onChangeDate={setReachDate}
         />
       </InputWrapper>
 

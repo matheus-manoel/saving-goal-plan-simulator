@@ -1,5 +1,10 @@
-import './styles.css';
+import { Container } from './styles';
+import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 
 export default function Header(): JSX.Element {
-  return <div className="header"> oi </div>;
+  return (
+    <Container>
+      <Logo />
+    </Container>
+  );
 }
