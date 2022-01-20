@@ -4,7 +4,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import React from 'react';
 import numeral from 'numeral';
 
-import { Label } from '../styles';
+import { Label, InputStyle } from '../styles';
 
 export interface CurrencyInputProps {
   label?: string;
@@ -15,6 +15,16 @@ export interface CurrencyInputProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const StyledInput = styled.input`
+  outline: none;
+  ${InputStyle};
+  font-weight: ${(props) => props.theme.fonts.weights.bold};
+  color: ${(props) => props.theme.colors.blueGray600};
+  font-size: 24px;
+  padding-left: 20px;
 `;
 
 export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
@@ -31,7 +41,7 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
       {label && <Label data-testid={'currency_input_label'}>{label}</Label>}
       <MaskedInput
         mask={createNumberMask({
-          prefix: '$',
+          prefix: '$ ',
           suffix: '',
           includeThousandsSeparator: true,
           thousandsSeparatorSymbol: ',',
@@ -47,6 +57,14 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
         defaultValue={25000}
         name={'amount'}
         data-testid={'currency_input'}
+        render={(ref, props) => {
+          return (
+            <StyledInput
+              ref={(input: HTMLInputElement) => ref(input)}
+              {...props}
+            />
+          );
+        }}
       />
     </Wrapper>
   );

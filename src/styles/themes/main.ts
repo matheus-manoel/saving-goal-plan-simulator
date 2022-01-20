@@ -3,6 +3,7 @@ const main = {
 
   colors: {
     neutralWhite: '#ffffff',
+    blueGray50: '#E9EEF2',
     blueGray100: '#CBD5DC',
     blueGray300: '#8A9CA9',
     blueGray400: '#708797',
@@ -21,7 +22,7 @@ const main = {
       lighter: 300,
       light: 400,
       normal: 500,
-      bold: 700,
+      bold: 600,
     },
   },
 };

@@ -47,7 +47,12 @@ const setUp = (label?: string) => {
 };
 
 it('renders without crashing', () => {
-  ReactDOM.render(<MonthAndYearInput />, document.createElement('div'));
+  ReactDOM.render(
+    <ThemeProvider theme={main}>
+      <MonthAndYearInput />
+    </ThemeProvider>,
+    document.createElement('div')
+  );
 });
 
 it('should render label passed by props', () => {

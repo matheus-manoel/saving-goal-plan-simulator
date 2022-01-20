@@ -30,7 +30,12 @@ const setUp = (label?: string) => {
 };
 
 it('renders without crashing', () => {
-  ReactDOM.render(<CurrencyInput />, document.createElement('div'));
+  ReactDOM.render(
+    <ThemeProvider theme={main}>
+      <CurrencyInput />
+    </ThemeProvider>,
+    document.createElement('div')
+  );
 });
 
 it('should render label passed by props', () => {
@@ -43,11 +48,11 @@ it('should render label passed by props', () => {
 it('does not print anything but numbers and dot', () => {
   const { currencyInput } = setUp();
   userEvent.type(currencyInput, '{selectall}-50e01 !@#% aoqrigfjbv.13');
-  expect(currencyInput.value).toBe('$5,001.13');
+  expect(currencyInput.value).toBe('$ 5,001.13');
 });
 
 it('does not accept leading zeroes except before dot and cents', () => {
   const { currencyInput } = setUp();
   userEvent.type(currencyInput, '{selectall}-050e01 !@#% aoqrigfjbv.13');
-  expect(currencyInput.value).toBe('$0.13');
+  expect(currencyInput.value).toBe('$ 0.13');
 });

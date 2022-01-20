@@ -10,4 +10,11 @@ export default createGlobalStyle`
     background: ${(props) => props.theme.colors.background};
     font-family: ${(props) => props.theme.fonts.primary};
   }
+
+  button {
+    background: none;
+    border: none;
+    font: inherit;
+    outline: inherit;
+  }
 `;

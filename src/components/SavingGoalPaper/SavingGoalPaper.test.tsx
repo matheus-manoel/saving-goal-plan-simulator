@@ -61,7 +61,7 @@ it('starts with expected monthly deposits info', () => {
 
   const { resultsMonthlyDepositisInfo } = setUp();
 
-  expect(resultsMonthlyDepositisInfo.innerHTML).toBe(
+  expect(resultsMonthlyDepositisInfo).toHaveTextContent(
     expectedResultsMonthlyDepositsInfo
   );
 });
@@ -98,7 +98,7 @@ it('shows right total amount after clicking the right arrow button 12 times and 
 
   const { resultsMonthlyDepositisInfo } = setup50kWith12RightArrowClicks();
 
-  expect(resultsMonthlyDepositisInfo.innerHTML).toBe(
+  expect(resultsMonthlyDepositisInfo).toHaveTextContent(
     expectedResultsMonthlyDepositsInfo
   );
 });

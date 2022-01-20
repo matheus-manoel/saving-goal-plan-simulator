@@ -4,7 +4,9 @@ import localeData from 'dayjs/plugin/localeData';
 import styled from 'styled-components';
 
 import useKeyPress from '../../../customHooks/useKeyPress';
-import { Label } from '../styles';
+import { InputStyle, Label } from '../styles';
+import { ReactComponent as ArrowLeftIcon } from '../../../assets/icons/arrow-left.svg';
+import { ReactComponent as ArrowRightIcon } from '../../../assets/icons/arrow-right.svg';
 
 dayjs.extend(localeData);
 
@@ -23,20 +25,49 @@ const OuterWrapper = styled.div`
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const InnerWrapper = styled.div`
+  ${InputStyle}
   display: flex;
+  justify-content: space-around;
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const MonthAndYearWrapper = styled.div`
   display: flex;
+  width: 60%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const MonthText = styled.span``;
+const StyledButton = styled.button`
+  width: 20%;
+  //color: ${(props) => props.color};
+  fill: ${(props) =>
+    props.disabled
+      ? props.theme.colors.blueGray50
+      : props.theme.colors.blueGray300};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+`;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const YearText = styled.span``;
+const MonthText = styled.p`
+  font-family: ${(props) => props.theme.fonts.secondary};
+  font-weight: ${(props) => props.theme.fonts.weights.bold};
+  color: ${(props) => props.theme.colors.blueGray900};
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const YearText = styled.p`
+  text-align: center;
+  font-family: ${(props) => props.theme.fonts.secondary};
+  font-weight: ${(props) => props.theme.fonts.weights.light};
+  color: ${(props) => props.theme.colors.blueGray400};
+  font-size: 16px;
+  line-height: 24px;
+`;
 
 export default function MonthAndYearInput(
   props: MonthAndYearInputProps
@@ -92,13 +123,13 @@ export default function MonthAndYearInput(
         <Label data-testid={'month_and_year_input_label'}>{label}</Label>
       )}
       <InnerWrapper>
-        <button
+        <StyledButton
           onClick={onLeftArrowButtonClick}
           disabled={shouldDisableLeftArrow}
           data-testid={'month_and_year_input_left_arrow_button'}
         >
-          {'<'}
-        </button>
+          <ArrowLeftIcon />
+        </StyledButton>
         <MonthAndYearWrapper>
           <MonthText data-testid={'month_and_year_input_month_text'}>
             {dayjs.months()[date.month()]}
@@ -107,12 +138,12 @@ export default function MonthAndYearInput(
             {date.year()}
           </YearText>
         </MonthAndYearWrapper>
-        <button
+        <StyledButton
           onClick={onRightArrowButtonClick}
           data-testid={'month_and_year_input_right_arrow_button'}
         >
-          {'>'}
-        </button>
+          <ArrowRightIcon />
+        </StyledButton>
       </InnerWrapper>
     </OuterWrapper>
   );
