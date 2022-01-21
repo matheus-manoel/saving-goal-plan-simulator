@@ -1,12 +1,19 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
-import styled from 'styled-components';
 
 import useKeyPress from '../../../customHooks/useKeyPress';
-import { InputStyle, Label } from '../styles';
+import { Label } from '../styles';
 import { ReactComponent as ArrowLeftIcon } from '../../../assets/icons/arrow-left.svg';
 import { ReactComponent as ArrowRightIcon } from '../../../assets/icons/arrow-right.svg';
+import {
+  InnerWrapper,
+  MonthAndYearWrapper,
+  MonthText,
+  OuterWrapper,
+  StyledButton,
+  YearText,
+} from './styles';
 
 dayjs.extend(localeData);
 
@@ -16,58 +23,6 @@ export interface MonthAndYearInputProps {
     SetStateAction<{ month: number; year: number; writtenMonth: string }>
   >;
 }
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const OuterWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const InnerWrapper = styled.div`
-  ${InputStyle}
-  display: flex;
-  justify-content: space-around;
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const MonthAndYearWrapper = styled.div`
-  display: flex;
-  width: 60%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const StyledButton = styled.button`
-  width: 20%;
-  //color: ${(props) => props.color};
-  fill: ${(props) =>
-    props.disabled
-      ? props.theme.colors.blueGray50
-      : props.theme.colors.blueGray300};
-  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const MonthText = styled.p`
-  font-family: ${(props) => props.theme.fonts.secondary};
-  font-weight: ${(props) => props.theme.fonts.weights.bold};
-  color: ${(props) => props.theme.colors.blueGray900};
-  font-size: 16px;
-  line-height: 24px;
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const YearText = styled.p`
-  text-align: center;
-  font-family: ${(props) => props.theme.fonts.secondary};
-  font-weight: ${(props) => props.theme.fonts.weights.light};
-  color: ${(props) => props.theme.colors.blueGray400};
-  font-size: 16px;
-  line-height: 24px;
-`;
 
 export default function MonthAndYearInput(
   props: MonthAndYearInputProps
@@ -89,7 +44,9 @@ export default function MonthAndYearInput(
 
   useEffect(() => {
     const today = dayjs();
-    if (date.month() === today.month() + 1 && date.year() === today.year()) {
+    const nextMonth = today.month() + 1;
+
+    if (date.month() === nextMonth && date.year() === today.year()) {
       setShouldDisableLeftArrow(true);
     } else {
       setShouldDisableLeftArrow(false);

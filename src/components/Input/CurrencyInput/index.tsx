@@ -1,31 +1,15 @@
-import styled from 'styled-components';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import React from 'react';
 import numeral from 'numeral';
 
-import { Label, InputStyle } from '../styles';
+import { Label } from '../styles';
+import { StyledInput, Wrapper } from './styles';
 
 export interface CurrencyInputProps {
   label?: string;
   onChangeValue?: (value: number) => void;
 }
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const StyledInput = styled.input`
-  outline: none;
-  ${InputStyle};
-  font-weight: ${(props) => props.theme.fonts.weights.bold};
-  color: ${(props) => props.theme.colors.blueGray600};
-  font-size: 24px;
-  padding-left: 20px;
-`;
 
 export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
   const { label, onChangeValue } = props;
@@ -53,7 +37,7 @@ export default function CurrencyInput(props: CurrencyInputProps): JSX.Element {
           allowLeadingZeroes: false,
         })}
         onChange={onChange}
-        type={'numerical'}
+        type={'tel'}
         defaultValue={25000}
         name={'amount'}
         data-testid={'currency_input'}

@@ -6,9 +6,15 @@ export default createGlobalStyle`
     padding: 0;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     background: ${(props) => props.theme.colors.background};
     font-family: ${(props) => props.theme.fonts.primary};
+    overflow-x: hidden;
+    position: relative;
   }
 
   button {
