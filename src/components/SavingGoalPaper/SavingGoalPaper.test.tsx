@@ -68,7 +68,6 @@ it('starts with expected monthly deposits info', () => {
 
 const setup50kWith12RightArrowClicks = () => {
   const {
-    component,
     monthlyAmount,
     currencyInput,
     rightArrowButton,

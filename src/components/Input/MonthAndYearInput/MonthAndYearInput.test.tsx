@@ -112,7 +112,7 @@ it('should not change date with arrow keys if button not on focus', () => {
 });
 
 it('should disable left arrow button if change to next month using keyboard arrows', () => {
-  const { leftArrowButton, monthText } = setUp();
+  const { leftArrowButton } = setUp();
 
   userEvent.click(leftArrowButton);
   for (let count = 0; count < 10; count++) {
